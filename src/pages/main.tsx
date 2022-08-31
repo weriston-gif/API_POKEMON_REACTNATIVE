@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, FlatList, TextInput, View } from 'react-native'
+import { Button, FlatList, TextInput, View, Text } from 'react-native'
 import axios from 'axios'
 
 
@@ -7,7 +7,16 @@ import axios from 'axios'
 const Main: React.FC = () => {
 
     const [pokemons, setPokemons] = useState("")
-    const [dados, setDados] = useState({})
+    const [dados, setDados] = useState({
+        name: "",
+        peso: "",
+        img: "",
+        type: "",
+        hp: "",
+        attack: "",
+        defense: ""
+    })
+    console.log(pokemons)
 
 
 
@@ -18,16 +27,14 @@ const Main: React.FC = () => {
             .then(resp => {
                 console.log();
                 setDados({
-                    name: pokemons, typy: resp.data.types,
-                    img:resp.data.sprites.other.dream_world, 
-                    type:resp.data.types[0].type.name, 
+                    name: pokemons,
+                    peso: resp.data.types,
+                    img: resp.data.sprites.other.dream_world,
+                    type: resp.data.types[0].type.name,
                     hp: resp.data.stats[0].base_stat,
                     attack: resp.data.stats[1].base_stat,
                     defense: resp.data.stats[1].base_stat,
-                    widht:resp.data.types.width
-
-
-                 })
+                })
             })
             .catch(err => {
                 // Handle Error Here
@@ -49,7 +56,9 @@ const Main: React.FC = () => {
                 color="#841584"
                 accessibilityLabel="Learn more about this "
             />
-
+            <Text>
+                {dados.type}
+            </Text>
 
         </>
     )
