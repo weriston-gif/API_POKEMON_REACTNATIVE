@@ -23,15 +23,15 @@ const Main: React.FC = () => {
     const serchPokemon = async () => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemons}/`)
             .then(resp => {
-                console.log(resp.data.types[0].type.name,);
+                console.log();
                 setDados({
                     name: pokemons,
-                    peso: resp.data.types,
+                    peso: resp.data.weight,
                     img: resp.data.sprites.other.dream_world,
                     type: resp.data.types[0].type.name,
                     hp: resp.data.stats[0].base_stat,
                     attack: resp.data.stats[1].base_stat,
-                    defense: resp.data.stats[1].base_stat,
+                    defense: resp.data.stats[2].base_stat,
                 })
                 setShowatribbute(true)
             })
@@ -62,25 +62,33 @@ const Main: React.FC = () => {
                 />
             </View>
             <View style={[styles.container, {
-                // Try setting `flexDirection` to `"row"`.
                 flexDirection: "column"
             }]}>
-                <View style={{ flex: 3, backgroundColor: "red" }} >
-
+                <View style={{ flex: 3 }} >
+                    {showatribbute ?
+                        <View style={{ flexDirection: "row" }}>
+                            <Text style={styles.textPrincipal}> {dados.name}</Text>
+                        </View>
+                        : ''}
                 </View>
-                <View style={{ flex: 2, backgroundColor: "darkorange", alignItems: "center" }} >
+
+                <View style={{ flex: 2, backgroundColor: "#FFF", borderRadius: 15, borderWidth: 1, borderColor: '#2FD9AB' }} >
                     {showatribbute ?
                         <View>
-                            <Text>Tipo: {dados.type}</Text>
-                            <Text>Ataque: {dados.attack}</Text>
-                            <Text>Defesa: {dados.defense}</Text>
+                            <View style={{ flexDirection: "row" }}>
+                                <Text style={styles.textLabel}>Tipo: {dados.type}</Text>
+                                <Text style={styles.textLabel}>Ataque: {dados.attack}</Text>
+                                <Text style={styles.textLabel}>Defesa: {dados.defense}</Text>
+                            </View>
+                            <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+                                <Text style={styles.textLabel}>HP: {dados.hp}</Text>
+                                <Text style={styles.textLabel}>Peso: {dados.peso}</Text>
+                            </View>
+
                         </View> :
                         ''}
 
-
-
                 </View>
-                <View style={{ flex: 1, backgroundColor: "green" }} />
             </View>
         </>
     )
@@ -89,17 +97,31 @@ const Main: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#2FD9AB"
     },
     searchSection: {
         flexDirection: 'row',
+        height: 40,
+        
     },
     searchIcon: {
-        paddingTop: 10,
     },
     input: {
         flex: 1,
         color: '#424242',
     },
+    textLabel: {
+        fontWeight: "bold",
+        fontSize: (18),
+        paddingRight: (2),
+        borderRadius: (2),
+        borderColor: "white"
+
+    },
+    textPrincipal: {
+        fontSize: (24),
+        fontWeight: "bold",
+    }
 
 });
 export default Main;
