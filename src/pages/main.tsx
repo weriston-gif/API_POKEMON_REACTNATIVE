@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, FlatList, TextInput, View, Text, StyleSheet, Image } from 'react-native'
+import { Pressable, FlatList, TextInput, View, Text, StyleSheet, Image } from 'react-native'
 import { Feather, Entypo } from "@expo/vector-icons";
 
 import axios from 'axios'
@@ -45,7 +45,7 @@ const Main: React.FC = () => {
             <View style={styles.searchSection}>
                 <Feather
                     name="search"
-                    size={20}
+                    size={30}
                     color="black"
                     style={{ marginLeft: 1 }}
                 />
@@ -55,11 +55,10 @@ const Main: React.FC = () => {
                     value={pokemons}
                     placeholder="Nome do pokemon..."
                 />
-                <Button
+                <Pressable
                     onPress={serchPokemon}
-                    title="Pokemon"
                     accessibilityLabel="Learn more about this Pokemon "
-                />
+                ><Text style={styles.text}>Pesquisar</Text></Pressable>
             </View>
             <View style={[styles.container, {
                 flexDirection: "column"
@@ -101,8 +100,9 @@ const styles = StyleSheet.create({
     },
     searchSection: {
         flexDirection: 'row',
-        height: 40,
-        
+        height: 30,
+        borderRadius: 15, borderWidth: 1, borderColor: '#2FD9AB',
+        backgroundColor: "#FFF"
     },
     searchIcon: {
     },
@@ -121,7 +121,27 @@ const styles = StyleSheet.create({
     textPrincipal: {
         fontSize: (24),
         fontWeight: "bold",
-    }
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'black',
+    },
+    text: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#2FD9AB',
+        backgroundColor:"#D9D9D9",
+        height: 100,
+        display: "flex",
+        borderRadius: 7,
+        borderWidth: 3, 
+        borderColor: '#CFCFCF',
+    },
 
 });
 export default Main;
