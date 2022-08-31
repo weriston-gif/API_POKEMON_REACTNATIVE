@@ -6,9 +6,6 @@ export default function App() {
   return (
     <>
       <Routes />
-      <View>
-        
-      </View>
     </>
 
   );
@@ -20,5 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    height: "2%"
   },
 });
